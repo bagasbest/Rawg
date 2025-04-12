@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black2"
+    tools:context=".detail.DetailGamesActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="30dp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/image"
+            android:padding="10dp"
+            android:src="@drawable/baseline_arrow_back_ios_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ivImage"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_margin="16dp"
+            app:riv_corner_radius="10dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/bg_rounded"
+            android:contentDescription="@string/image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnBack" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image"
+            android:layout_marginBottom="-30dp"
+            app:layout_anchorGravity="bottom|end"
+            app:layout_constraintBottom_toBottomOf="@+id/ivImage"
+            app:layout_constraintEnd_toEndOf="@+id/ivImage"
+            app:srcCompat="@drawable/ic_unfavorite" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:fontFamily="@font/poppins_extra_bold"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fab"
+            tools:text="Grand Theft Auto V" />
+
+        <ImageView
+            android:id="@+id/ivWindows"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            android:contentDescription="@string/image"
+            android:src="@drawable/ic_platform_windows"
+            app:layout_constraintStart_toStartOf="@+id/tvName"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+        <ImageView
+            android:id="@+id/ivApple"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:visibility="gone"
+            android:contentDescription="@string/image"
+            android:src="@drawable/ic_platform_apple"
+            app:layout_constraintStart_toEndOf="@+id/ivWindows"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+        <ImageView
+            android:id="@+id/ivPlaystation"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            android:contentDescription="@string/image"
+            android:src="@drawable/ic_platform_playstation"
+            app:layout_constraintStart_toEndOf="@+id/ivApple"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+        <ImageView
+            android:id="@+id/ivXbox"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:visibility="gone"
+            android:contentDescription="@string/image"
+            android:src="@drawable/ic_platform_xbox"
+            app:layout_constraintStart_toEndOf="@+id/ivPlaystation"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+        <ImageView
+            android:id="@+id/ivNintendo"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:visibility="gone"
+            android:contentDescription="@string/image"
+            android:src="@drawable/ic_platform_nintendo_switch"
+            app:layout_constraintStart_toEndOf="@+id/ivXbox"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black4"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvName"
+            app:layout_constraintTop_toBottomOf="@+id/ivWindows"
+            tools:text="Action, Adventure, RPG, Fantasy, Open World, Single Player" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-60dp"
+            android:backgroundTint="@android:color/white"
+            android:progressTint="@color/white"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:secondaryProgressTint="@android:color/white"
+            android:stepSize="0.01"
+            app:layout_constraintStart_toStartOf="@+id/tvCategory"
+            app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
+
+        <TextView
+            android:id="@+id/tvRatingCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_extra_bold"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginStart="-50dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+            app:layout_constraintStart_toEndOf="@+id/ratingBar"
+            app:layout_constraintTop_toTopOf="@+id/ratingBar"
+            tools:text="from 1000 Users" />
+
+        <TextView
+            android:id="@+id/tvEsrbRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black4"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+            tools:text="Esrb Rating: Mature" />
+
+        <TextView
+            android:id="@+id/tvRelease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black4"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvEsrbRating"
+            tools:text="Release Date: 20 January 2020" />
+
+        <TextView
+            android:id="@+id/tvTags"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black4"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRelease"
+            tools:text="Tags: Single Player, Co-Op" />
+
+        <WebView
+            android:id="@+id/tvDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:paddingHorizontal="16dp"
+            android:scrollbars="none"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTags"
+            tools:ignore="WebViewLayout" />
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescription">
+
+            <LinearLayout
+                android:id="@+id/linearLayoutUrls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/black4"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTags"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivImage" />
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_extra_bold"
+            android:text="@string/platform"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:contentDescription="@string/image"
+            android:src="@drawable/ic_website"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/tvWebsite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@android:color/holo_blue_light"
+            android:textSize="14sp"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/imageView3"
+            tools:text="https://google.com" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

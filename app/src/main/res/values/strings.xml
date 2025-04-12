@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name" translatable="false">Rawg</string>
+    <string name="title_favorite" translatable="false">Favorite</string>
+    <string name="image">image</string>
+    <string name="rawg_ngame_database_api">Rawg\nGame Database API</string>
+    <string name="games">Games</string>
+    <string name="creator">Creator</string>
+    <string name="profile">Profile</string>
+    <string name="change_language">Change Language</string>
+    <string name="logout">Logout</string>
+    <string name="developed_by_love">Developed by Love</string>
+    <string name="search_games_title">Search Games Title</string>
+    <string name="hi">Hi</string>
+    <string name="something_wrong">Something wrong!</string>
+    <string name="from">from</string>
+    <string name="users">Users</string>
+    <string name="website">Website</string>
+    <string name="platform">Platform</string>
+</resources>

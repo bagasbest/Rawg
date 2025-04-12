@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="image">gambar</string>
+    <string name="rawg_ngame_database_api">Rawg\nAPI Basis Data Game</string>
+    <string name="games">Permainan</string>
+    <string name="creator">Pembuat</string>
+    <string name="profile">Profil</string>
+    <string name="change_language">Ganti Bahasa</string>
+    <string name="logout">Keluar</string>
+    <string name="developed_by_love">Dikembangkan dengan Cinta</string>
+    <string name="search_games_title">Cari Judul Permainan</string>
+    <string name="hi">Hai</string>
+    <string name="something_wrong">Ada yang salah!</string>
+    <string name="from">dari</string>
+    <string name="users">Pengguna</string>
+    <string name="website">Situs Web</string>
+    <string name="platform">Platform</string>
+</resources>

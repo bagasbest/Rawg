@@ -1,0 +1,10 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Rawg" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorAccent">@color/black3</item>
+    </style>
+
+    <style name="Theme.Rawg" parent="Base.Theme.Rawg" />
+</resources>

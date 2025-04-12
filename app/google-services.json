@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "788906355124",
+    "project_id": "rawg-project",
+    "storage_bucket": "rawg-project.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:788906355124:android:e501676c1a76729912aae1",
+        "android_client_info": {
+          "package_name": "com.project.rawg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "788906355124-onls47ojb07n9b2pou289ofp8ho81v38.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.rawg",
+            "certificate_hash": "d168f40e767b6aec8c502786aa094e433eacc907"
+          }
+        },
+        {
+          "client_id": "788906355124-m7n0etouqfbm750i8vu66arjrb2dnjoo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpODDNRFjrSIAPST3AsGMCQ93Vu9uuFyc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "788906355124-m7n0etouqfbm750i8vu66arjrb2dnjoo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
