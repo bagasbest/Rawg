@@ -2,26 +2,15 @@ package com.project.rawg
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.credentials.CredentialManager
-import androidx.credentials.CustomCredential
-import androidx.credentials.GetCredentialRequest
-import androidx.credentials.GetCredentialResponse
-import androidx.credentials.exceptions.GetCredentialException
-import androidx.lifecycle.lifecycleScope
-import com.google.android.libraries.identity.googleid.GetGoogleIdOption
-import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
-import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
-import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.project.rawg.databinding.ActivityMainBinding
 import com.project.rawg.home.HomeActivity
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,60 +29,46 @@ class MainActivity : AppCompatActivity() {
         binding.signInButton.setOnClickListener {
             signIn()
         }
+
+        binding.registerBtn.setOnClickListener {
+            gotoRegisterPage()
+        }
+    }
+
+    private fun gotoRegisterPage() {
+        startActivity(Intent(this, RegisterActivity::class.java))
     }
 
     private fun signIn() {
-        val credentialManager = CredentialManager.create(this)
+        val email = binding.etEmail.text.toString()
+        val password = binding.etPassword.text.toString()
 
-        val googleIdOption = GetGoogleIdOption.Builder()
-            .setFilterByAuthorizedAccounts(false)
-            .setServerClientId(getString(R.string.default_web_client_id))
-            .build()
-
-        val request = GetCredentialRequest.Builder()
-            .addCredentialOption(googleIdOption)
-            .build()
-
-        lifecycleScope.launch {
-            try {
-                val result: GetCredentialResponse = credentialManager.getCredential(
-                    request = request,
-                    context = this@MainActivity
-                )
-                handleSignInResult(result)
-            } catch (e: GetCredentialException) {
-                e.printStackTrace()
-            }
+        if (email.isEmpty() || !email.matches(Regex("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"))) {
+            showToast(getString(R.string.please_input_valid_email))
+            return
         }
-    }
 
-    private fun handleSignInResult(result: GetCredentialResponse) {
-        when (val credential = result.credential) {
-            is CustomCredential -> {
-                if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
-                    try {
-                        val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
-                        firebaseAuthWithGoogle(googleIdTokenCredential.idToken)
-                    } catch (e: GoogleIdTokenParsingException) {
-                        e.printStackTrace()
-                    }
+        if (password.isEmpty() || password.length < 6) {
+            showToast(getString(R.string.please_input_valid_password))
+            return
+        }
+
+        binding.progressBar.visibility = View.VISIBLE
+        Firebase
+            .auth
+            .signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener {
+                binding.progressBar.visibility = View.GONE
+                if (it.isSuccessful) {
+                    updateUI(auth.currentUser)
                 } else {
-                    Log.d(TAG, "Unexpected type of credential")
+                    showToast(it.exception?.message ?: getString(R.string.sign_in_failed))
                 }
             }
-            else -> Log.d(TAG, "Unexpected type of credential")
-        }
     }
 
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        val credential: AuthCredential = GoogleAuthProvider.getCredential(idToken, null)
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    updateUI(user)
-                }
-            }
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun updateUI(user: FirebaseUser?) {
@@ -102,9 +77,5 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-    }
-
-    companion object {
-        private const val TAG = "MainActivity"
     }
 }

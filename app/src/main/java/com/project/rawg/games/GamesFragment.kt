@@ -55,7 +55,7 @@ class GamesFragment : Fragment() {
                     .circleCrop()
                     .into(ivImage)
 
-                tvName.text = "${getString(R.string.hi)}, ${currentUser?.displayName}!"
+                tvName.text = "${getString(R.string.hi)}, ${currentUser?.email}!"
 
                 val gamesAdapter = GamesAdapter()
                 gamesAdapter.onItemClick = { selectedData ->

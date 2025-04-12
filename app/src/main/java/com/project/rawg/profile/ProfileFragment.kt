@@ -48,7 +48,7 @@ class ProfileFragment : Fragment() {
                 .circleCrop()
                 .into(ivImage)
 
-            tvName.text = currentUser?.displayName
+            tvName.text = getString(R.string.profile)
             tvEmail.text = currentUser?.email
 
             btnChangeLanguage.setOnClickListener {
