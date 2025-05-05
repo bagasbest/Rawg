@@ -14,7 +14,6 @@
     <string name="something_wrong">Something wrong!</string>
     <string name="from">from</string>
     <string name="users">Users</string>
-    <string name="website">Website</string>
     <string name="platform">Platform</string>
     <string name="login">Login</string>
     <string name="don_t_have_an_account_register_now">Don\'t Have an Account, Register Now</string>
@@ -23,7 +22,6 @@
     <string name="input_name">Input Name</string>
     <string name="register">Register</string>
     <string name="back_to_login_page">Back to Login Page</string>
-    <string name="please_input_name">Please Input Name!</string>
     <string name="please_input_valid_email">Please Input Valid Email</string>
     <string name="please_input_valid_password">Password Minimum 6 Character!</string>
     <string name="success_register">Success Register!</string>

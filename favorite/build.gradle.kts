@@ -42,4 +42,5 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.roundedimageview)
+    implementation(libs.lottie)
 }

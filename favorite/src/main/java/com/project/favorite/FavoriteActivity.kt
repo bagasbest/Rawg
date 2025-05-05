@@ -59,8 +59,13 @@ class FavoriteActivity : AppCompatActivity() {
 
             viewModel.favoriteGames.observe(this@FavoriteActivity) { games ->
                 gamesAdapter.submitList(games)
-                binding.tvEmpty.visibility =
-                    if (games.isNotEmpty()) View.GONE else View.VISIBLE
+                    if (games.isNotEmpty()) {
+                        binding.tvEmpty.visibility = View.GONE
+                        binding.lottieAnimationView.visibility = View.GONE
+                    } else {
+                        binding.tvEmpty.visibility = View.VISIBLE
+                        binding.lottieAnimationView.visibility = View.VISIBLE
+                    }
             }
 
             with(binding.rvGames) {

@@ -80,17 +80,16 @@ class GamesFragment : Fragment() {
                 gamesViewModel.searchResult.observe(viewLifecycleOwner, Observer { games ->
                     if (games != null) {
                         when (games) {
-                            is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
+                            is Resource.Loading -> {}
                             is Resource.Success -> {
-                                binding.progressBar.visibility = View.GONE
-
+                                stopShimmer()
                                 Glide.with(requireActivity())
                                     .load(games.data?.get(0)?.backgroundImage)
                                     .into(binding.imageView2)
                                 gamesAdapter.submitList(games.data)
                             }
                             is Resource.Error -> {
-                                binding.progressBar.visibility = View.GONE
+                                stopShimmer()
                                 binding.viewError.root.visibility = View.VISIBLE
                                 binding.viewError.tvError.text =
                                     games.message ?: getString(R.string.something_wrong)
@@ -119,5 +118,17 @@ class GamesFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun stopShimmer() {
+        binding.apply {
+            shimmerGames.stopShimmer()
+            shimmerGames.visibility = View.GONE
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -26,11 +26,12 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        debug {
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
@@ -114,4 +115,6 @@ dependencies {
     implementation(libs.play.services.auth)
     implementation(libs.roundedimageview)
     debugImplementation(libs.library)
+    debugImplementation(libs.leakcanary.android)
+    implementation(libs.shimmer)
 }

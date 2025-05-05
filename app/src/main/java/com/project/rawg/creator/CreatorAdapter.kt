@@ -17,7 +17,6 @@ import com.project.rawg.R
 
 class CreatorAdapter : ListAdapter<Creator, CreatorAdapter.CreatorViewHolder>(DIFF_CALLBACK) {
 
-    // Click listener callback
     var onItemClick: ((Creator) -> Unit)? = null
     private var currentViewMode: String = "grid"
 
@@ -26,39 +25,43 @@ class CreatorAdapter : ListAdapter<Creator, CreatorAdapter.CreatorViewHolder>(DI
         private const val VIEW_TYPE_GRID = 2
 
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Creator>() {
-            override fun areItemsTheSame(oldItem: Creator, newItem: Creator): Boolean {
-                return oldItem.creatorId == newItem.creatorId
-            }
-
-            override fun areContentsTheSame(oldItem: Creator, newItem: Creator): Boolean {
-                return oldItem == newItem
-            }
+            override fun areItemsTheSame(old: Creator, new: Creator) = old.creatorId == new.creatorId
+            override fun areContentsTheSame(old: Creator, new: Creator) = old == new
         }
     }
 
-    // Called from the fragment when view mode toggles
     fun setViewMode(viewMode: String) {
-        currentViewMode = viewMode
-        notifyDataSetChanged()
+        if (currentViewMode != viewMode) {
+            currentViewMode = viewMode
+            // Rebind only visible range instead of full dataset reload
+            notifyItemRangeChanged(0, itemCount)
+        }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (currentViewMode == "list") VIEW_TYPE_LIST else VIEW_TYPE_GRID
-    }
+    override fun getItemViewType(position: Int) =
+        if (currentViewMode == "list") VIEW_TYPE_LIST else VIEW_TYPE_GRID
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreatorViewHolder {
-        val layoutId = if (viewType == VIEW_TYPE_LIST) {
-            R.layout.item_creator_list
-        } else {
-            R.layout.item_creator_grid
-        }
+        val layoutId = if (viewType == VIEW_TYPE_LIST) R.layout.item_creator_list else R.layout.item_creator_grid
         val view = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
         return CreatorViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: CreatorViewHolder, position: Int) {
-        val creator = getItem(position)
-        holder.bind(creator)
+        holder.bind(getItem(position))
+    }
+
+    override fun onBindViewHolder(
+        holder: CreatorViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if (payloads.isNotEmpty()) {
+            // Only rebind content on view mode change
+            holder.bind(getItem(position))
+        } else {
+            super.onBindViewHolder(holder, position, payloads)
+        }
     }
 
     inner class CreatorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -69,27 +72,30 @@ class CreatorAdapter : ListAdapter<Creator, CreatorAdapter.CreatorViewHolder>(DI
 
         init {
             itemView.setOnClickListener {
-                // Use adapterPosition if not in a wrong state; alternatively, bindingAdapterPosition can be used
-                onItemClick?.invoke(getItem(bindingAdapterPosition))
+                bindingAdapterPosition.takeIf { it != RecyclerView.NO_POSITION }?.let {
+                    onItemClick?.invoke(getItem(it))
+                }
             }
         }
 
         fun bind(creator: Creator) {
-            Glide.with(itemView.context).load(creator.image).placeholder(R.drawable.ic_refresh).error(R.drawable.ic_broken_image).into(ivImage)
+            Glide.with(itemView.context)
+                .load(creator.image)
+                .placeholder(R.drawable.ic_refresh)
+                .error(R.drawable.ic_broken_image)
+                .into(ivImage)
             tvName.text = creator.name
             tvPosition.text = creator.position
-            chipGroupGames?.let { group ->
-                group.removeAllViews()
-                val games = creator.games.split(", ")
-                games.forEach { game ->
-                    val chip = Chip(itemView.context).apply {
+            chipGroupGames?.apply {
+                removeAllViews()
+                creator.games.split(", ").forEach { game ->
+                    addView(Chip(context).apply {
                         text = game
                         isClickable = false
                         isCheckable = false
                         setChipBackgroundColorResource(R.color.black4)
-                        setTextColor(ContextCompat.getColor(itemView.context, R.color.white))
-                    }
-                    group.addView(chip)
+                        setTextColor(ContextCompat.getColor(context, R.color.white))
+                    })
                 }
             }
         }
